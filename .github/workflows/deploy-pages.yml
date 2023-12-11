@@ -89,7 +89,7 @@ jobs:
     if: failure()
     runs-on: ubuntu-latest
     steps:
-      - name: Error Information
+      - name: Error Information ❌
         run: |
           echo "Something went wrong"
           echo "${{github}}"
