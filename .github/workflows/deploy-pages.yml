@@ -65,8 +65,10 @@ jobs:
       - name: Install dependencies 🦙
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
       - name: Build with Next.js 🦓
+        id: build-files
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
       - name: Upload artifact 🏗️
+        if: failure() && steps.build-files.outcome == 'failure'
         uses: actions/upload-pages-artifact@v2
         with:
           path: ./out
@@ -82,3 +84,12 @@ jobs:
       - name: Deploy to GitHub Pages 🥌
         id: deployment
         uses: actions/deploy-pages@v3
+
+  report:
+    if: failure()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Error Information
+        run: |
+          echo "Something went wrong"
+          echo "${{github}}"
