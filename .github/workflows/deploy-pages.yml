@@ -20,8 +20,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout 🛎️
-        uses: actions/checkout@v3
-      - name: Detect package manager 🕺
+        uses: actions/checkout@v4
+      - name: Detect package manager 📦
         id: detect-package-manager
         run: |
           if [ -f "${{ github.workspace }}/yarn.lock" ]; then
@@ -39,7 +39,7 @@ jobs:
             exit 1
           fi
       - name: Setup Node 🦙
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: '20.5.1'
           cache: ${{ steps.detect-package-manager.outputs.manager }}
