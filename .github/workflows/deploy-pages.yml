@@ -68,7 +68,6 @@ jobs:
         id: build-files
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
       - name: Upload artifact 🏗️
-        if: failure() && steps.build-files.outcome == 'failure'
         uses: actions/upload-pages-artifact@v2
         with:
           path: ./out
@@ -86,6 +85,7 @@ jobs:
         uses: actions/deploy-pages@v3
 
   report:
+    needs: [build, deploy]
     if: failure()
     runs-on: ubuntu-latest
     steps:
