@@ -20,6 +20,7 @@ export default function Home() {
             This static site is deployed using github ci/cd pipeline
           </p>
         </section>
+        <span>{}</span>
       </main>
     </>
   );
